@@ -1,0 +1,24 @@
+﻿  Viewer.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\viewer.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Viewer.h': No such file or directory
+  TrackBall.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\trackball.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'TrackBall.h': No such file or directory
+  Texture.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\texture.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Texture.h': No such file or directory
+  Shader.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\shader.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Shader.h': No such file or directory
+  Renderer.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\renderer.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Renderer.h': No such file or directory
+  Model.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\model.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Model.h': No such file or directory
+  maind.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\maind.cpp(4): fatal error C1083: 포함 파일을 열 수 없습니다. 'GL/glew.h': No such file or directory
+  main.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\main.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Viewer.h': No such file or directory
+  Light.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\light.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Light.h': No such file or directory
+  glslShader.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\glslshader.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
+  dd.cpp
+  Camera.cpp
+c:\users\riul5\documents\visual studio 2015\projects\sshw1\sshw1\camera.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Camera.h': No such file or directory
+  코드를 생성하고 있습니다...
