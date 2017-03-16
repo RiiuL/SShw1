@@ -20,7 +20,8 @@ void Renderer::startup() {
 
 	//object loading
 	myObject.Load_Object();
-	//myObject.Bind_VBO(myObject.vertex_list, myObject.texture_list, myObject.normal_list);
+	//myObject.Load_Objfile("obj1test.obj");
+	myObject.Bind_VBO(myObject.vertex_list, myObject.texture_list, myObject.normal_list);
 	//myObject.Bind_Texture("teapottex.bmp");
 	glBindVertexArray(0);
 
@@ -29,7 +30,7 @@ void Renderer::startup() {
 	glUseProgram(ProgramID); //두 shader와 연결된 프로그램명이 담겼지. 그걸 쓸 거야
 	glUniformMatrix4fv(glGetUniformLocation(ProgramID, "Mproj"), 1, GL_FALSE, glm::value_ptr(CAM.proj_mat));
 	glUniformMatrix4fv(glGetUniformLocation(ProgramID, "Mview"), 1, GL_FALSE, glm::value_ptr(CAM.view_mat));
-	glUniform1i(glGetUniformLocation(ProgramID, "TEX"), 0); //texture
+	//glUniform1i(glGetUniformLocation(ProgramID, "TEX"), 0); //texture
 	glUseProgram(0);
 
 	glEnable(GL_CULL_FACE); // back face culling

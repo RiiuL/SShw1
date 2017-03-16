@@ -19,9 +19,9 @@ inline glm::vec3 Sphere_Point(GLuint R, GLuint HD, GLuint WD, int j, int i) {
 	return p;
 }
 void Model::Load_Object() { //구 만들기
-	GLuint HD = 10; //높이를 얼마로 나눌 건지(height division; resolution)
-	GLuint WD = 10; //너비를 얼마로 나눌 건지.
-	GLuint R = 0.5; //radius
+	GLuint HD = 20; //높이를 얼마로 나눌 건지(height division; resolution)
+	GLuint WD = 50; //너비를 얼마로 나눌 건지.
+	GLuint R = 10; //radius
 
 	for (int j = 0; j < HD; j++) {
 		for (int i = 0; i < WD; i++) {
@@ -30,25 +30,14 @@ void Model::Load_Object() { //구 만들기
 			glm::vec3 ru = Sphere_Point(R, HD, WD, j, i+1);
 			glm::vec3 rd = Sphere_Point(R, HD, WD, j+1, i+1);
 
-			vertex_list.push_back(lu); normal_list.push_back(lu);
-			vertex_list.push_back(ld); normal_list.push_back(ld);
-			vertex_list.push_back(ru); normal_list.push_back(ru);
-			vertex_list.push_back(ru); normal_list.push_back(ru);
-			vertex_list.push_back(ld); normal_list.push_back(ld);
-			vertex_list.push_back(rd); normal_list.push_back(rd);
+			vertex_list.push_back(lu); normal_list.push_back(normalize(lu));
+			vertex_list.push_back(ld); normal_list.push_back(normalize(ld));
+			vertex_list.push_back(ru); normal_list.push_back(normalize(ru));
+			vertex_list.push_back(ru); normal_list.push_back(normalize(ru));
+			vertex_list.push_back(ld); normal_list.push_back(normalize(ld));
+			vertex_list.push_back(rd); normal_list.push_back(normalize(rd));
 		}
 	}
-	glGenBuffers(1, &vertex_buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*vertex_list.size(), &vertex_list[0][0], GL_STATIC_DRAW);
-	glVertexAttribPointer(vbo_count, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-	glEnableVertexAttribArray(vbo_count++);
-
-	glGenBuffers(1, &normal_buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*normal_list.size(), &normal_list[0][0], GL_STATIC_DRAW);
-	glVertexAttribPointer(vbo_count, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-	glEnableVertexAttribArray(vbo_count++);
 }
 
 void Model::Load_Triangle() {
