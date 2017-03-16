@@ -19,9 +19,9 @@ void Renderer::startup() {
 	glBindVertexArray(vao);
 
 	//object loading
-	
-	myObject.Bind_VBO(myObject.vertex_list, myObject.texture_list, myObject.normal_list);
-	myObject.Bind_Texture("teapottex.bmp");
+	myObject.Load_Object();
+	//myObject.Bind_VBO(myObject.vertex_list, myObject.texture_list, myObject.normal_list);
+	//myObject.Bind_Texture("teapottex.bmp");
 	glBindVertexArray(0);
 
 	Bind_Light(lightsource);
