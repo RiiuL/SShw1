@@ -17,8 +17,9 @@ void Renderer::startup() {
 	
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-	//myObject.Load_Triangle();
-	myObject.Load_Objfile("obj1test.obj");
+
+	//object loading
+	
 	myObject.Bind_VBO(myObject.vertex_list, myObject.texture_list, myObject.normal_list);
 	myObject.Bind_Texture("teapottex.bmp");
 	glBindVertexArray(0);

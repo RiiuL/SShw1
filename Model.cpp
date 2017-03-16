@@ -11,6 +11,9 @@ Model::~Model()
 {
 }
 
+void Model::Load_Object() {
+
+}
 void Model::Load_Triangle() {
 	glm::vec3 a = { 0.f, 0.5f, 0.f };//vertex_list[0];//
 	glm::vec3 b = { 0.f, 0.f, 0.f };//vertex_list[1];//
@@ -183,3 +186,4 @@ void Model::Bind_Texture(const char* texpath) {
 	TEX.myLoadBMP24(texpath); //데이터읽는 부분과 bind 부분 분리할 것.
 
 }
+
