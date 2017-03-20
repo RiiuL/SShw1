@@ -186,7 +186,7 @@ void Viewer::move(GLFWwindow* window, double xpos, double ypos) {
 
 		//À§Ä¡ update
 		CAM.pastQ = myQuaternion * CAM.pastQ;
-		CAM.model_mat = glm::toMat4(CAM.pastQ);
+		CAM.view_mat = CAM.lookat_mat*glm::toMat4(CAM.pastQ);
 		winpos.x = xpos; winpos.y = ypos;
 	}
 	winpos.x = xpos; winpos.y = ypos;
