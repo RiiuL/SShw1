@@ -1,5 +1,6 @@
 #include "Model.h"
 
+uint32_t Model::idmapper = 1;
 
 
 Model::Model()
@@ -26,9 +27,9 @@ void Model::Load_Object() { //구 만들기
 	for (int j = 0; j < HD; j++) {
 		for (int i = 0; i < WD; i++) {
 			glm::vec3 lu = Sphere_Point(R, HD, WD, j, i); //left up
-			glm::vec3 ld = Sphere_Point(R, HD, WD, j+1, i);
-			glm::vec3 ru = Sphere_Point(R, HD, WD, j, i+1);
-			glm::vec3 rd = Sphere_Point(R, HD, WD, j+1, i+1);
+			glm::vec3 ld = Sphere_Point(R, HD, WD, j + 1, i);
+			glm::vec3 ru = Sphere_Point(R, HD, WD, j, i + 1);
+			glm::vec3 rd = Sphere_Point(R, HD, WD, j + 1, i + 1);
 
 			vertex_list.push_back(lu); normal_list.push_back(normalize(lu));
 			vertex_list.push_back(ld); normal_list.push_back(normalize(ld));
@@ -38,7 +39,10 @@ void Model::Load_Object() { //구 만들기
 			vertex_list.push_back(rd); normal_list.push_back(normalize(rd));
 		}
 	}
-	
+	for (int i = 0; i < Num_SubModel; i++) {
+		HittingBox[i].center = glm::vec3(0.f, 0.f, 0.f);
+		HittingBox[i].radius = R;
+	}
 	Bind_VBO(vertex_list, texture_list, normal_list);
 }
 void Model::Load_Object2() { //구 만들기
@@ -246,3 +250,7 @@ void Model::Bind_Texture(const char* texpath) {
 
 }
 
+
+bool Model::inside_the_box() {
+
+}

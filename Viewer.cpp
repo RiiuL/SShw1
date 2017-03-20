@@ -189,6 +189,9 @@ void Viewer::move(GLFWwindow* window, double xpos, double ypos) {
 		CAM.view_mat = CAM.lookat_mat*glm::toMat4(CAM.pastQ);
 		winpos.x = xpos; winpos.y = ypos;
 	}
+	if (tracing) {
+		
+	}
 	winpos.x = xpos; winpos.y = ypos;
 }
 

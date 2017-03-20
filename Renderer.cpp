@@ -34,7 +34,6 @@ void Renderer::startup() {
 	glBindVertexArray(vao);
 	//object loading
 	myObject[0].Load_Object();
-	//myObject.Bind_Texture("teapottex.bmp");
 	glBindVertexArray(0);
 
 	//glGenVertexArrays(1, &vao);
@@ -60,22 +59,25 @@ void Renderer::render(void) {
 	for (int i = 0; i < ObjectSize; i++) {
 		for (int j = 0; j < 3; j++) { //j=0 앞, j=1중간, j=2 뒤
 			glm::mat4 ModelView_mat;
-			glm::mat4 Model_mat = glm::mat4(1.0);
+			myObject[i].Model_mat[j] = glm::mat4(1.0);
 			glm::vec3 Color;
 			switch (j) {
 			case 0:
 				Color = glm::vec3(0.7, 0, 0);
 				break;
 			case 1:
-				Model_mat = glm::translate(glm::vec3(0.5, 0.5, 0.5));  //A*=B 이럼 A=A*B. 뒤에 붙음.
+				myObject[i].Model_mat[j] = glm::translate(glm::vec3(0.5, 0.5, 0.5));  //A*=B 이럼 A=A*B. 뒤에 붙음.
 				Color = glm::vec3(0, 0.7, 0);
 				break;
 			case 2:
-				Model_mat = glm::translate(glm::vec3(-0.5, -0.5, -0.5));
+				myObject[i].Model_mat[j] = glm::translate(glm::vec3(-0.5, -0.5, -0.5));
 				Color = glm::vec3(0, 0, 0.7);
 				break;
 			}
-			ModelView_mat = CAM.view_mat*Model_mat;
+			ModelView_mat = CAM.view_mat*myObject[i].Model_mat[j];
+
+			glm::vec3& myOb_HBox = myObject[i].HittingBox[j].center;
+			myOb_HBox = ModelView_mat*glm::vec4(myOb_HBox, 1.f);
 
 			glUniform3fv(glGetUniformLocation(ProgramID, "Color"), 1, glm::value_ptr(Color));
 			glUniformMatrix4fv(glGetUniformLocation(ProgramID, "Mview"), 1, GL_FALSE, glm::value_ptr(ModelView_mat));
