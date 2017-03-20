@@ -34,7 +34,6 @@ void Renderer::startup() {
 	glBindVertexArray(vao);
 	//object loading
 	myObject[0].Load_Object();
-	myObject[1].Load_Object2();
 	//myObject.Bind_Texture("teapottex.bmp");
 	glBindVertexArray(0);
 
@@ -59,8 +58,15 @@ void Renderer::render(void) {
 	glUseProgram(ProgramID); //두 shader와 연결된 프로그램명이 담겼지. 그걸 쓸 거야
 	glBindVertexArray(vao);
 	for (int i = 0; i < ObjectSize; i++) {
-		myObject[i].Bind_VBO(myObject[i].vertex_list, myObject[i].texture_list, myObject[i].normal_list);
-		glDrawArrays(GL_TRIANGLES, 0, myObject[i].vertex_list.size()); //세 번째 파트 = vertex갯수.
+		for (int j = 0; j < 3; j++) { //j=0 앞, j=1중간, j=2 뒤
+			//switch (j) {
+			//case 0:
+				
+			//}
+			glUniformMatrix4fv(glGetUniformLocation(ProgramID, "Mproj"), 1, GL_FALSE, glm::value_ptr(CAM.proj_mat));
+			glUniformMatrix4fv(glGetUniformLocation(ProgramID, "Mview"), 1, GL_FALSE, glm::value_ptr(CAM.view_mat));
+			glDrawArrays(GL_TRIANGLES, 0, myObject[i].vertex_list.size()); //세 번째 파트 = vertex갯수.
+		}
 	}
 	glUseProgram(0);
 }
