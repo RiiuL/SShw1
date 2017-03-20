@@ -20,7 +20,8 @@ public:
 	//virtual void move() = 0;
 	//virtual void rotate() = 0;
 	glm::mat4 lookat_mat = glm::lookAt(eye, at, up);
-	glm::mat4 view_mat = lookat_mat*glm::toMat4(pastQ);
+	glm::mat4 view_mat = lookat_mat;
+	glm::mat4 model_mat = glm::toMat4(pastQ);
 	glm::mat4 proj_mat = glm::perspective(fovy, aspect, near, far); //fovy, aspect_ratio, near, far
 public:
 	Camera();

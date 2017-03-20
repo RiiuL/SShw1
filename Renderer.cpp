@@ -33,7 +33,7 @@ void Renderer::startup() {
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 	//object loading
-	myObject[0].Load_Object();
+	myObject[0].Load_Object2();
 	//myObject.Bind_Texture("teapottex.bmp");
 	glBindVertexArray(0);
 
@@ -63,8 +63,9 @@ void Renderer::render(void) {
 			//case 0:
 				
 			//}
+			glm::mat4 ModelView_mat = CAM.view_mat*CAM.model_mat;
 			glUniformMatrix4fv(glGetUniformLocation(ProgramID, "Mproj"), 1, GL_FALSE, glm::value_ptr(CAM.proj_mat));
-			glUniformMatrix4fv(glGetUniformLocation(ProgramID, "Mview"), 1, GL_FALSE, glm::value_ptr(CAM.view_mat));
+			glUniformMatrix4fv(glGetUniformLocation(ProgramID, "Mview"), 1, GL_FALSE, glm::value_ptr(ModelView_mat));
 			glDrawArrays(GL_TRIANGLES, 0, myObject[i].vertex_list.size()); //세 번째 파트 = vertex갯수.
 		}
 	}
