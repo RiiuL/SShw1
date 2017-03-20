@@ -15,15 +15,8 @@ Renderer::~Renderer()
 void Renderer::startup() {
 	ProgramID = myShader.Load_shader("shader.vs", "shader.fs");
 	
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
+	
 
-	//object loading
-	myObject.Load_Object();
-	//myObject.Load_Objfile("obj1test.obj");
-	myObject.Bind_VBO(myObject.vertex_list, myObject.texture_list, myObject.normal_list);
-	//myObject.Bind_Texture("teapottex.bmp");
-	glBindVertexArray(0);
 
 	Bind_Light(lightsource);
 
@@ -35,6 +28,17 @@ void Renderer::startup() {
 
 	glEnable(GL_CULL_FACE); // back face culling
 	glEnable(GL_DEPTH_TEST); // depth test 
+
+
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+	//object loading
+	myObject[0].Load_Object();
+	myObject[1].Load_Object2();
+	//myObject.Bind_Texture("teapottex.bmp");
+	glBindVertexArray(0);
+
+	//glGenVertexArrays(1, &vao);
 }
 
 
@@ -54,7 +58,10 @@ void Renderer::draw() {
 void Renderer::render(void) {
 	glUseProgram(ProgramID); //두 shader와 연결된 프로그램명이 담겼지. 그걸 쓸 거야
 	glBindVertexArray(vao);
-	glDrawArrays(GL_TRIANGLES, 0, myObject.vertex_list.size()); //세 번째 파트 = vertex갯수.
+	for (int i = 0; i < ObjectSize; i++) {
+		myObject[i].Bind_VBO(myObject[i].vertex_list, myObject[i].texture_list, myObject[i].normal_list);
+		glDrawArrays(GL_TRIANGLES, 0, myObject[i].vertex_list.size()); //세 번째 파트 = vertex갯수.
+	}
 	glUseProgram(0);
 }
 

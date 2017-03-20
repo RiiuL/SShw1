@@ -21,6 +21,7 @@ public:
 	Model(); ~Model();
 	void Load_Triangle();
 	void Load_Object();
+	void Load_Object2();
 	void Load_Objfile(const char*);
 	void Bind_VBO(const VVec3, const VVec3, const VVec3);
 	void Bind_Texture(const char*);

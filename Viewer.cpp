@@ -58,7 +58,8 @@ void Viewer::bootup() {
 	winpos = glm::vec2(init_xpos, init_ypos);
 	//cout << "hwere"<<winpos.x << " " << winpos.y << endl;
 
-	//key input
+	//key input mod
+
 
 	//각각의 경우 해당하는 함수의 형식이 있음. 찾아 볼 것
 	// static 형식의 함수만 쓸 수 있음. 근데 class안의 함수는 static일 수가 없다(여러번 선언될 수 있다)
@@ -84,16 +85,22 @@ void Viewer::keyboard(GLFWwindow* WindowIDptr, int key, int scancode, int action
 void Viewer::mouse(GLFWwindow* window, int button, int action, int mods) { //다양한 인풋 모드가 있고 그에 따라 동작하는 게 다름.
 	double xpos, ypos;
 	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS) {
-		glfwGetCursorPos(window, &xpos, &ypos);
-		std::cout << "mid" << xpos << " " << ypos << std::endl;
+		
 	}
 	if (lctrl && button == GLFW_MOUSE_BUTTON_LEFT) {
 		if (action == GLFW_PRESS) { scaling = true; std::cout << "scaling true" << std::endl; }
 		else if (action == GLFW_RELEASE) { scaling = false; std::cout << "scaling false" << std::endl; }
 	}
-	else if (button == GLFW_MOUSE_BUTTON_LEFT) {
+	else if (button == GLFW_MOUSE_BUTTON_RIGHT) {
 		if (action == GLFW_PRESS) { tracking = true; std::cout << "tracking true" << std::endl; }
 		else if (action == GLFW_RELEASE) { tracking = false; std::cout << "tracking false" << std::endl; }
+	}
+	else if (button == GLFW_MOUSE_BUTTON_LEFT) {
+		if (action == GLFW_PRESS) { tracing = true; 
+			glfwGetCursorPos(window, &xpos, &ypos);
+			std::cout << xpos << " " << ypos << std::endl;
+		}
+		else if (action == GLFW_RELEASE) { tracing = false;	}
 	}
 }
 
@@ -149,11 +156,11 @@ void Viewer::move(GLFWwindow* window, double xpos, double ypos) {
 	//cout << "cur pos: " << xpos << ", " << ypos << endl;
 	if (scaling) {
 		//이것 말고 카메라의 위치를 수정하는 방식으로.
-		if (ypos > winpos.y) {//감소
+		if (ypos < winpos.y) {//증가
 			CAM.lookat_mat *= glm::scale(glm::vec3(0.9f, 0.9f, 0.9f));
 			CAM.view_mat = CAM.lookat_mat*glm::toMat4(CAM.pastQ);
 		}
-		else if (ypos < winpos.y) {//증가
+		else if (ypos > winpos.y) {//감소
 			CAM.lookat_mat *= glm::scale(glm::vec3(1.1f, 1.1f, 1.1f));
 			CAM.view_mat = CAM.lookat_mat*glm::toMat4(CAM.pastQ);
 		}

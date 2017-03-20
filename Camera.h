@@ -8,7 +8,12 @@
 class Camera
 {
 public:
-	glm::vec3 eye = { 0.f, 0.f, 500.f };
+	float fovy = 50.f;
+	float aspect = 1260 / 760;
+	float near = 0.1f;
+	float far = 100.f;
+
+	glm::vec3 eye = { 0.f, 0, 10 };
 	glm::vec3 at = { 0.0f, 0.0f, 0.0f };
 	glm::vec3 up = { 0.0f, 1.0f, 0.0f };
 	glm::quat pastQ = { 1.0f, 0.f, 0.f, 0.f };
@@ -16,7 +21,7 @@ public:
 	//virtual void rotate() = 0;
 	glm::mat4 lookat_mat = glm::lookAt(eye, at, up);
 	glm::mat4 view_mat = lookat_mat*glm::toMat4(pastQ);
-	glm::mat4 proj_mat = glm::perspective(50.f, 1.0f, 0.1f, 1000.0f); //fovy, aspect_ratio, near, far
+	glm::mat4 proj_mat = glm::perspective(fovy, aspect, near, far); //fovy, aspect_ratio, near, far
 public:
 	Camera();
 	~Camera();

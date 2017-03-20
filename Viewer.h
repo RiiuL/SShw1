@@ -4,8 +4,8 @@ class Viewer: public Renderer //Viewer==windowâ
 {
 public:
 	GLFWwindow* WindowID = nullptr;
-	GLuint WINDOWSIZEx = 500;
-	GLuint WINDOWSIZEy = 500;
+	GLuint WINDOWSIZEx = 500;//1260;
+	GLuint WINDOWSIZEy = 500;// 760;
 
 public:
 	void myCreateWindow();
@@ -21,9 +21,12 @@ public:
 protected:
 	glm::vec2 winpos = glm::vec2(0, 0);
 private:
+	//mod
 	bool lctrl = false;
 	bool scaling = false;
 	bool tracking = false;
+	bool picking = false;
+	bool tracing = false;
 private:
 };
 

@@ -24,7 +24,7 @@ void main(){
 	Ksls_f = pow(Ksls_f, 110);
 
 	//vec3 Kala = Ka*texture2D(TEX, tc).rgb;//ambient.xyz;
-	vec3 Kala = Ka*vec3(1.f, 0.f, 0.f);
+	vec3 Kala = Ka*vec3(0.7f, 0.f, 0.f);
 	vec3 Kdld = max(Kdld_f*diffuse.xyz, 0);
 	vec3 Ksls = Ksls_f*specular.xyz;
 

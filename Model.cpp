@@ -12,7 +12,7 @@ Model::~Model()
 }
 
 #define pi 3.14159265359
-inline glm::vec3 Sphere_Point(GLuint R, GLuint HD, GLuint WD, int j, int i) {
+inline glm::vec3 Sphere_Point(float R, GLuint HD, GLuint WD, int j, int i) {
 	// radius, 높이 해상도, 너비 해상도, 위도, 경도
 	float rj = R*sin(pi / HD *j);
 	glm::vec3 p = { rj*cos(2 * pi / WD *i), rj*sin(2 * pi / WD *i), R*cos(pi / HD *j) };
@@ -21,7 +21,7 @@ inline glm::vec3 Sphere_Point(GLuint R, GLuint HD, GLuint WD, int j, int i) {
 void Model::Load_Object() { //구 만들기
 	GLuint HD = 20; //높이를 얼마로 나눌 건지(height division; resolution)
 	GLuint WD = 50; //너비를 얼마로 나눌 건지.
-	GLuint R = 10; //radius
+	float R = 0.5; //radius
 
 	for (int j = 0; j < HD; j++) {
 		for (int i = 0; i < WD; i++) {
@@ -38,6 +38,37 @@ void Model::Load_Object() { //구 만들기
 			vertex_list.push_back(rd); normal_list.push_back(normalize(rd));
 		}
 	}
+	
+	Bind_VBO(vertex_list, texture_list, normal_list);
+}
+void Model::Load_Object2() { //구 만들기
+	GLuint HD = 20; //높이를 얼마로 나눌 건지(height division; resolution)
+	GLuint WD = 50; //너비를 얼마로 나눌 건지.
+	float R = 0.5; //radius
+
+	for (int j = 0; j < HD; j++) {
+		for (int i = 0; i < WD; i++) {
+			glm::vec3 lu = Sphere_Point(R, HD, WD, j, i); //left up
+			glm::vec3 ld = Sphere_Point(R, HD, WD, j + 1, i);
+			glm::vec3 ru = Sphere_Point(R, HD, WD, j, i + 1);
+			glm::vec3 rd = Sphere_Point(R, HD, WD, j + 1, i + 1);
+
+			normal_list.push_back(normalize(lu));
+			normal_list.push_back(normalize(ld));
+			normal_list.push_back(normalize(ru));
+			normal_list.push_back(normalize(ru));
+			normal_list.push_back(normalize(ld));
+			normal_list.push_back(normalize(rd));
+
+			vertex_list.push_back(lu + glm::vec3(0.5f, 0.5f, 0.5f));
+			vertex_list.push_back(ld + glm::vec3(0.5f, 0.5f, 0.5f));
+			vertex_list.push_back(ru + glm::vec3(0.5f, 0.5f, 0.5f));
+			vertex_list.push_back(ru + glm::vec3(0.5f, 0.5f, 0.5f));
+			vertex_list.push_back(ld + glm::vec3(0.5f, 0.5f, 0.5f));
+			vertex_list.push_back(rd + glm::vec3(0.5f, 0.5f, 0.5f));
+		}
+	}
+	Bind_VBO(vertex_list, texture_list, normal_list);
 }
 
 void Model::Load_Triangle() {
@@ -188,7 +219,7 @@ void Model::Load_Objfile(const char* obj_path) {
 
 }
 void Model::Bind_VBO(const VVec3 vertex_list, const VVec3 texture_list, const VVec3 normal_list) {
-
+	vbo_count = 0;
 	glGenBuffers(1, &vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*vertex_list.size(), &vertex_list[0][0], GL_STATIC_DRAW);

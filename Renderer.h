@@ -10,9 +10,11 @@ class Renderer
 public:
 	GLuint ProgramID;
 	Shader myShader;
-	Model myObject;
+	Model myObject[3];
 	Camera CAM;
 	Light lightsource;
+private:
+	GLuint ObjectSize = 3;
 	
 public:
 	Renderer();
