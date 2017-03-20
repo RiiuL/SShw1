@@ -13,6 +13,7 @@ layout(binding = 3) uniform LIGHT{
 };
 
 uniform sampler2D TEX;
+uniform vec3 Color;
 
 void main(){
 	float Ka = 0.2f;
@@ -24,9 +25,10 @@ void main(){
 	Ksls_f = pow(Ksls_f, 110);
 
 	//vec3 Kala = Ka*texture2D(TEX, tc).rgb;//ambient.xyz;
-	vec3 Kala = Ka*vec3(0.7f, 0.f, 0.f);
+	vec3 Kala = Ka*Color;
 	vec3 Kdld = max(Kdld_f*diffuse.xyz, 0);
 	vec3 Ksls = Ksls_f*specular.xyz;
 
-	fragColor = vec4( Kala + Kdld + Ksls, 1.0f);
+	//fragColor = vec4( Kala + Kdld + Ksls, 1.0f);
+	fragColor = vec4(Color, 1.f);
 }
