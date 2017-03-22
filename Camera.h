@@ -9,7 +9,7 @@ class Camera
 {
 public:
 	float fovy = 50.f;
-	float aspect = 1260 / 760;
+	float aspect = 1260.f / 760;
 	float near = 0.1f;
 	float far = 100.f;
 
