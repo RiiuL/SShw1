@@ -20,11 +20,6 @@ public:
 
 //하위 항목
 public:
-	Model()
-		:m_id(idmapper++) 
-	{
-
-	}
 	typedef struct boundarybox {
 		glm::vec3 center;
 		float radius;

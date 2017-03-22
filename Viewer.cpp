@@ -150,7 +150,13 @@ glm::quat computeRotationStart2Target(const glm::vec3 &start, const glm::vec3 &t
 	);
 
 }
-
+inline void homogeneousCord(glm::vec4& v) {
+	if (v.w != 0 || v.w != 1) {
+		v.x /= v.w;
+		v.y /= v.w;
+		v.z /= v.w;
+	}
+}
 void Viewer::move(GLFWwindow* window, double xpos, double ypos) {
 
 	//cout << "cur pos: " << xpos << ", " << ypos << endl;
@@ -190,6 +196,24 @@ void Viewer::move(GLFWwindow* window, double xpos, double ypos) {
 		winpos.x = xpos; winpos.y = ypos;
 	}
 	if (tracing) {
+		glm::vec4 nearpoint, farpoint;
+		//glm::vec4 v = glm::vec4(0, 0, 1, 1);
+		//glm::vec4 vp1 = CAM.proj_mat*v;
+		//glm::vec4 vp2 = glm::inverse(CAM.proj_mat)*vp1;
+		//glm::vec4 cpf = glm::vec4(0, 0, -100, 1);
+		//glm::vec4 cpfp = CAM.proj_mat*cpf;
+		double normx = -2 * xpos / WINDOWSIZEx + 1;
+		double normy = 2 * ypos / WINDOWSIZEy - 1;
+
+		nearpoint = glm::inverse(CAM.proj_mat)*glm::vec4(normx, normy, -1, 1.0);
+		farpoint = glm::inverse(CAM.proj_mat)*glm::vec4(normx, normy, 1, 1.0);
+		homogeneousCord(nearpoint); //w항으로 나눠 주기
+		homogeneousCord(farpoint);
+
+		std::cout << "near" << nearpoint.x << ", " << nearpoint.y << ", " << nearpoint.z << "//";
+		std::cout << "far" << farpoint.x << ", " << farpoint.y << ", " << farpoint.z << std::endl;
+		//std::cout << "vp2" << vp2.x << ", " << vp2.y << ", " << vp2.z << std::endl;
+		//std::cout << "cpfp" << cpfp.x << ", " << cpfp.y << ", " << cpfp.z << std::endl;
 		
 	}
 	winpos.x = xpos; winpos.y = ypos;

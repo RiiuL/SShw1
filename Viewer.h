@@ -4,8 +4,8 @@ class Viewer: public Renderer //Viewer==windowâ
 {
 public:
 	GLFWwindow* WindowID = nullptr;
-	GLuint WINDOWSIZEx = 500;//1260;
-	GLuint WINDOWSIZEy = 500;// 760;
+	GLuint WINDOWSIZEx = 1260;
+	GLuint WINDOWSIZEy =  760;
 
 public:
 	void myCreateWindow();

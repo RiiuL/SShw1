@@ -63,14 +63,15 @@ void Renderer::render(void) {
 			glm::vec3 Color;
 			switch (j) {
 			case 0:
+				myObject[i].Model_mat[j] = glm::translate(glm::vec3(0, 0, 2));
 				Color = glm::vec3(0.7, 0, 0);
 				break;
 			case 1:
-				myObject[i].Model_mat[j] = glm::translate(glm::vec3(0.5, 0.5, 0.5));  //A*=B 이럼 A=A*B. 뒤에 붙음.
+				myObject[i].Model_mat[j] = glm::translate(glm::vec3(0, 0, 4));  //A*=B 이럼 A=A*B. 뒤에 붙음.
 				Color = glm::vec3(0, 0.7, 0);
 				break;
 			case 2:
-				myObject[i].Model_mat[j] = glm::translate(glm::vec3(-0.5, -0.5, -0.5));
+				myObject[i].Model_mat[j] = glm::translate(glm::vec3(0, 0, 6));
 				Color = glm::vec3(0, 0, 0.7);
 				break;
 			}

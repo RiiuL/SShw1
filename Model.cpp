@@ -3,7 +3,7 @@
 uint32_t Model::idmapper = 1;
 
 
-Model::Model()
+Model::Model():m_id(idmapper++)
 {
 }
 
@@ -64,12 +64,12 @@ void Model::Load_Object2() { //구 만들기
 			normal_list.push_back(normalize(ld));
 			normal_list.push_back(normalize(rd));
 
-			vertex_list.push_back(lu + glm::vec3(0.5f, 0.5f, 0.5f));
-			vertex_list.push_back(ld + glm::vec3(0.5f, 0.5f, 0.5f));
-			vertex_list.push_back(ru + glm::vec3(0.5f, 0.5f, 0.5f));
-			vertex_list.push_back(ru + glm::vec3(0.5f, 0.5f, 0.5f));
-			vertex_list.push_back(ld + glm::vec3(0.5f, 0.5f, 0.5f));
-			vertex_list.push_back(rd + glm::vec3(0.5f, 0.5f, 0.5f));
+			vertex_list.push_back(lu + glm::vec3(0.f, 0.f, 2.f));
+			vertex_list.push_back(ld + glm::vec3(0.f, 0.f, 2.f));
+			vertex_list.push_back(ru + glm::vec3(0.f, 0.f, 2.f));
+			vertex_list.push_back(ru + glm::vec3(0.f, 0.f, 2.f));
+			vertex_list.push_back(ld + glm::vec3(0.f, 0.f, 2.f));
+			vertex_list.push_back(rd + glm::vec3(0.f, 0.f, 2.f));
 		}
 	}
 	Bind_VBO(vertex_list, texture_list, normal_list);
@@ -251,6 +251,6 @@ void Model::Bind_Texture(const char* texpath) {
 }
 
 
-bool Model::inside_the_box() {
+bool Model::inside_the_box(double x, double y) {
 
 }
